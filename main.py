@@ -18,11 +18,13 @@ LONG_BREAK_MIN = 20
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Pomodoro")
+window.config(padx=100, pady=50)    # add padding to the image
 
 # create canvas
 canvas = Canvas(width=200, height=224)
 tomato_img = PhotoImage(file="tomato.png")
-canvas.create_image(100, 112, image=tomato_img)
+canvas.create_image(102, 112, image=tomato_img) 
+canvas.create_text(102, 130, text="00:00")
 canvas.pack()
 
 window.mainloop()
