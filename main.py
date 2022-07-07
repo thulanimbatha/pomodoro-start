@@ -23,8 +23,7 @@ window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)    # add padding to the image
 
 # label
-label = Label(text="Timer")
-label.config(bg=YELLOW, fg=GREEN, font=(FONT_NAME, 42, "italic"))
+label = Label(text="Timer", bg=YELLOW, fg=GREEN, font=(FONT_NAME, 50, "italic"))
 label.grid(column=1, row=0)
 
 # create canvas
@@ -35,16 +34,15 @@ canvas.create_text(100, 130, text="00:00", fill="white", font=(FONT_NAME, 35, "b
 canvas.grid(column=1, row=1)
 
 # Start button 
-button1 = Button(text="Start")
+button1 = Button(text="Start", highlightthickness=0)
 button1.grid(column=0, row=2)
 
 # Reset button 
-button2 = Button(text="Reset")
+button2 = Button(text="Reset", highlightthickness=0)
 button2.grid(column=2, row=2)
 
 # check mark
-check_mark = Label(text="✔✅")
-check_mark.config(fg=PINK, bg=YELLOW)
+check_mark = Label(text="✅",bg=YELLOW, fg=GREEN, highlightthickness=0)
 check_mark.grid(column=1, row=3)
 
 window.mainloop()
