@@ -6,12 +6,25 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
-SHORT_BREAK_MIN = 1
+WORK_MIN = 25
+SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
+timer = None
 
 # ---------------------------- TIMER RESET ------------------------------- # 
+def reset_timer():
+    global reps
+    # stop timer
+    window.after_cancel(timer)
+    # reset timer text
+    canvas.itemconfig(timer_text, text="00:00") # we want to change the timer text to "00:00"
+    # reset label
+    label.config(text="Timer")
+    # reset check marks
+    check_mark.config(text="")
+    # reset reps
+    reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
@@ -45,6 +58,7 @@ def start_timer():
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 def count_down(count):
+    global timer
 
     # we need count to be displayed using time format
     count_min = math.floor(count / 60)  # returns largest whole number smaller than count
@@ -56,7 +70,7 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        timer = window.after(1000, count_down, count - 1)
     else:   
         # when count goes to 0 -> restart timer using different reps
         start_timer()
@@ -87,7 +101,7 @@ button1 = Button(text="Start", highlightthickness=0, command=start_timer)
 button1.grid(column=0, row=2)
 
 # Reset button 
-button2 = Button(text="Reset", highlightthickness=0)
+button2 = Button(text="Reset", highlightthickness=0, command=reset_timer)
 button2.grid(column=2, row=2)
 
 # check mark
