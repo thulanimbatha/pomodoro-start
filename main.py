@@ -27,14 +27,14 @@ def start_timer():
     if reps == 8:
         count_down(long_break_sec)
         label.config(text="Take A Longer Break", fg=RED)
+        reps = 0    # reset reps
 
     # BREAK
     # if its the 2nd/4th/6th rep -> count down 5min -> BREAK
     elif reps % 2 == 0:
         count_down(short_break_sec)
         label.config(text="Break!", fg=PINK)
-        reps = 0    # reset reps
-
+        
     # WORK
     # if its the 1st/3rd/5th/7th rep -> count down 25 min 
     else:   
