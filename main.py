@@ -6,8 +6,8 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
+WORK_MIN = 1
+SHORT_BREAK_MIN = 1
 LONG_BREAK_MIN = 20
 reps = 0
 
@@ -26,14 +26,14 @@ def start_timer():
     # if its the 8th rep -> count down 15-30 mins -> long break
     if reps == 8:
         count_down(long_break_sec)
-        label.config(text="Take A Longer Break", fg=RED)
+        label.config(text="Long Break", fg=RED)
         reps = 0    # reset reps
 
     # BREAK
     # if its the 2nd/4th/6th rep -> count down 5min -> BREAK
     elif reps % 2 == 0:
         count_down(short_break_sec)
-        label.config(text="Break!", fg=PINK)
+        label.config(text="Break", fg=PINK)
         
     # WORK
     # if its the 1st/3rd/5th/7th rep -> count down 25 min 
@@ -60,6 +60,11 @@ def count_down(count):
     else:   
         # when count goes to 0 -> restart timer using different reps
         start_timer()
+        marks = ""
+        work_sessions = math.floor(reps/2)  # divide reps by 2 then take highest whole number lower than it
+        for _ in range(work_sessions):
+            marks += "✅"   # when it gets to 2 -> marks = "✅✅"
+        check_mark.config(text=marks)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -86,7 +91,7 @@ button2 = Button(text="Reset", highlightthickness=0)
 button2.grid(column=2, row=2)
 
 # check mark
-check_mark = Label(text="✅",bg=YELLOW, fg=GREEN, highlightthickness=0)
+check_mark = Label(bg=YELLOW, fg=GREEN, highlightthickness=0)
 check_mark.grid(column=1, row=3)
 
 window.mainloop()
